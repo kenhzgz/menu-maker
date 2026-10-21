@@ -3,7 +3,7 @@ name: Build Static Site
 on:
   push:
     branches: [ main ] # Se ejecuta al subir cambios a la rama main
-  workflow_dispatch: # Permite ejecutarlo manualmente desde la pesta√±a Actions
+  workflow_dispatch: # Permite ejecutarlo manualmente desde la pestaÒa Actions
 
 jobs:
   build:
@@ -16,11 +16,11 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22 # Usa una versi√≥n LTS estable
-          #cache: 'npm'
+          node-version: 22 # Usa una versiÛn LTS estable
+          cache: 'npm'
 
       - name: Install dependencies
-        run: npm install --legacy-peer-deps --no-audit --no-fund
+        run: npm ci --legacy-peer-deps
 
       - name: Build static site
         run: npm run build
@@ -29,4 +29,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: static-site
-          path: .output/public/ # Carpeta de salida est√°tica de TanStack Start
+          path: .output/public/ # Carpeta de salida est·tica de TanStack Start
