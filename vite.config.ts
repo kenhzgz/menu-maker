@@ -26,6 +26,9 @@ export default defineConfig({
         crawlLinks: true, // Opcional: sigue los enlaces para generar más páginas
         failOnError: true, // Fuerza a que falle si hay un error, para detectarlo
       },
+      build: {
+    cssMinify: 'esbuild',
+  },
     }),
   ]
     ,
