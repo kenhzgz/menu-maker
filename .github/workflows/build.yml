@@ -1,0 +1,32 @@
+name: Build Static Site
+
+on:
+  push:
+    branches: [ main ] # Se ejecuta al subir cambios a la rama main
+  workflow_dispatch: # Permite ejecutarlo manualmente desde la pestaña Actions
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22 # Usa una versión LTS estable
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci --legacy-peer-deps
+
+      - name: Build static site
+        run: npm run build
+
+      - name: Upload static artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: static-site
+          path: .output/public/ # Carpeta de salida estática de TanStack Start
